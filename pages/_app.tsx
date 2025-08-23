@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete)
     }
-  }, [router.events, router.asPath]) // include asPath to satisfy react-hooks rule
+  }, [router.events, router.asPath])
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function App({ Component, pageProps }: AppProps) {
           background: '#111',
           color: '#fff',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
-          zIndex: 2_147_483_647 // numeric separators fix
+          zIndex: 9999
         }}
       >
         <Link href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>
@@ -75,7 +75,7 @@ export default function App({ Component, pageProps }: AppProps) {
         ))}
       </nav>
 
-      <div style={{ height: 56 }} />
+      {/* no spacer here */}
       <Component {...pageProps} />
     </>
   )

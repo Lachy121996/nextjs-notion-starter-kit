@@ -1,3 +1,4 @@
+/* eslint-disable simple-import-sort/imports, react-hooks/exhaustive-deps */
 // CSS imports (ok to keep first)
 import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-coy.css'

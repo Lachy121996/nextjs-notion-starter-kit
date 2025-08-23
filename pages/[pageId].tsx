@@ -1,3 +1,4 @@
+/* eslint-disable simple-import-sort/imports */
 import type { GetStaticPaths, GetStaticProps } from 'next'
 
 import { NotionPage } from '@/components/NotionPage'

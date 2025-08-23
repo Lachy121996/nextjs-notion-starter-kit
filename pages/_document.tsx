@@ -1,3 +1,4 @@
+/* eslint-disable simple-import-sort/imports */
 import { IconContext } from '@react-icons/all-files'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 

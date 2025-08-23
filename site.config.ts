@@ -1,3 +1,4 @@
+// site.config.ts
 import { siteConfig } from './lib/site-config'
 
 export default siteConfig({
@@ -5,9 +6,16 @@ export default siteConfig({
   rootNotionSpaceId: null,
 
   name: 'Lachlan’s Blog',
-  domain: 'localhost',
-  author: 'Lachlan Barrett',
+  domain: 'lachlancb.me', // was "localhost"
+  author: 'Lachlan Coleman Barrett',
   description: 'SEO-driven hub built with Next.js + Notion',
+
+  // --- Social profiles (optional; remove any you don’t use)
+  twitter: 'lachlancb',                          // handle only
+  github: 'Lachy121996',
+  linkedin: 'in/lachlan-coleman-barrett',        // path after linkedin.com/
+  youtube: '',                                   // e.g. 'channel/XXXX' or 'c/YourName'
+  newsletter: '',                                // full URL if you have one
 
   isPreviewImageSupportEnabled: true,
   isRedisEnabled: false,

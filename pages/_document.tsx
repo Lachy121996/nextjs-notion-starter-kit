@@ -5,20 +5,46 @@ export default class MyDocument extends Document {
   override render() {
     return (
       <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
-        <Html lang='en'>
+        <Html lang="en">
           <Head>
-            <link rel='shortcut icon' href='/favicon.ico' />
-            <link
-              rel='icon'
-              type='image/png'
-              sizes='32x32'
-              href='favicon.png'
-            />
-
-            <link rel='manifest' href='/manifest.json' />
+            <link rel="shortcut icon" href="/favicon.ico" />
+            <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+            <link rel="manifest" href="/manifest.json" />
           </Head>
 
           <body>
+            {/* --- HARD, ALWAYS-ON NAV --- */}
+            <div
+              id="hard-nav"
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 56,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                padding: '0 16px',
+                background: '#111',
+                color: '#fff',
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                zIndex: 2147483647
+              }}
+            >
+              <a href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>
+                LCB
+              </a>
+              <a href="/blog" style={{ color: '#fff' }}>Blog</a>
+              <a href="/tools" style={{ color: '#fff' }}>Tools</a>
+              <a href="/services" style={{ color: '#fff' }}>Services</a>
+              <a href="/consulting" style={{ color: '#fff' }}>Consulting</a>
+              <a href="/about" style={{ color: '#fff' }}>About</a>
+            </div>
+
+            {/* spacer so content isn't hidden under the fixed nav */}
+            <div style={{ height: 56 }} />
+
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -35,32 +61,24 @@ export default class MyDocument extends Document {
   var mql = window.matchMedia(preferDarkQuery)
   var supportsColorSchemeQuery = mql.media === preferDarkQuery
   var localStorageTheme = null
-  try {
-    localStorageTheme = localStorage.getItem(storageKey)
-  } catch (err) {}
+  try { localStorageTheme = localStorage.getItem(storageKey) } catch (err) {}
   var localStorageExists = localStorageTheme !== null
   if (localStorageExists) {
     localStorageTheme = JSON.parse(localStorageTheme)
   }
-  // Determine the source of truth
   if (localStorageExists) {
-    // source of truth from localStorage
     setClassOnDocumentBody(localStorageTheme)
   } else if (supportsColorSchemeQuery) {
-    // source of truth from system
     setClassOnDocumentBody(mql.matches)
     localStorage.setItem(storageKey, mql.matches)
   } else {
-    // source of truth from document.body
     var isDarkMode = document.body.classList.contains(classNameDark)
     localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
   }
-})();
-`
+})();`
               }}
             />
             <Main />
-
             <NextScript />
           </body>
         </Html>

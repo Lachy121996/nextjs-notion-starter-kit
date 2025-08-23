@@ -1,65 +1,31 @@
 import { siteConfig } from './lib/site-config'
 
 export default siteConfig({
-  // the site's root Notion page (required)
   rootNotionPageId: '2561f7289de980a9953de5ee7fb1c1fe',
-
-  // if you want to restrict pages to a single notion workspace (optional)
-  // (this should be a Notion ID; see the docs for how to extract this)
   rootNotionSpaceId: null,
 
-  // basic site info (required)
   name: 'Lachlan’s Blog',
   domain: 'localhost',
   author: 'Lachlan Barrett',
-
-  // open graph metadata (optional)
   description: 'SEO-driven hub built with Next.js + Notion',
 
-  // social usernames (optional)
-  twitter: 'transitive_bs',
-  github: 'transitive-bullshit',
-  linkedin: 'fisch2',
-  // mastodon: '#', // optional mastodon profile URL, provides link verification
-  // newsletter: '#', // optional newsletter URL
-  // youtube: '#', // optional youtube channel name or `channel/UCGbXXXXXXXXXXXXXXXXXXXXXX`
-
-  // default notion icon and cover images for site-wide consistency (optional)
-  // page-specific values will override these site-wide defaults
-  defaultPageIcon: null,
-  defaultPageCover: null,
-  defaultPageCoverPosition: 0.5,
-
-  // whether or not to enable support for LQIP preview images (optional)
   isPreviewImageSupportEnabled: true,
-
-  // whether or not redis is enabled for caching generated preview images (optional)
-  // NOTE: if you enable redis, you need to set the `REDIS_HOST` and `REDIS_PASSWORD`
-  // environment variables. see the readme for more info
   isRedisEnabled: false,
 
-  // map of notion page IDs to URL paths (optional)
-  // any pages defined here will override their default URL paths
-  // example:
-  //
-  // pageUrlOverrides: {
-  //   '/foo': '067dd719a912471ea9a3ac10710e7fdf',
-  //   '/bar': '0be6efce9daf42688f65c76b89f8eb27'
-  // }
-  pageUrlOverrides: null,
+  pageUrlOverrides: {
+    '/about':      '2561f7289de981f69690f2875fb64687',
+    '/tools':      '2581f7289de980b48138c74364348448',
+    '/consulting': '2561f7289de981ddb9fcf0e2670f83cb',
+    '/services':   '2571f7289de9805fb0c5dfcbeb36daa5',
+    '/blog':       '2581f7289de980e2a275f4098ec35a0d'
+  },
 
-  // whether to use the default notion navigation style or a custom one with links to
-  // important pages. To use `navigationLinks`, set `navigationStyle` to `custom`.
-  navigationStyle: 'default'
-  // navigationStyle: 'custom',
-  // navigationLinks: [
-  //   {
-  //     title: 'About',
-  //     pageId: 'f1199d37579b41cbabfc0b5174f4256a'
-  //   },
-  //   {
-  //     title: 'Contact',
-  //     pageId: '6a29ebcb935a4f0689fe661ab5f3b8d1'
-  //   }
-  // ]
+  navigationStyle: 'custom',
+  navigationLinks: [
+    { title: 'Blog',       pageId: '2581f7289de980e2a275f4098ec35a0d' },
+    { title: 'Tools',      pageId: '2581f7289de980b48138c74364348448' },
+    { title: 'Services',   pageId: '2571f7289de9805fb0c5dfcbeb36daa5' },
+    { title: 'Consulting', pageId: '2561f7289de981ddb9fcf0e2670f83cb' },
+    { title: 'About',      pageId: '2561f7289de981f69690f2875fb64687' }
+  ]
 })

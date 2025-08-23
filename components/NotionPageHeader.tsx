@@ -77,7 +77,7 @@ export function NotionPageHeader({
           background: '#111',
           color: '#fff',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
-          zIndex: 2147483647
+          zIndex: 9999
         }}
       >
         <Link href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>

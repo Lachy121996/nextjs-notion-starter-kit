@@ -1,5 +1,4 @@
-/* eslint-disable simple-import-sort/imports, react-hooks/exhaustive-deps */
-// CSS imports (ok to keep first)
+/* eslint-disable simple-import-sort/imports */
 import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-coy.css'
 import 'react-notion-x/src/styles.css'

@@ -1,9 +1,9 @@
+import Link from 'next/link'
 import type * as types from 'notion-types'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
 import * as React from 'react'
-import Link from 'next/link'
 import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
 
 import { isSearchEnabled, navigationLinks, navigationStyle } from '@/lib/config'
@@ -24,16 +24,12 @@ function ToggleThemeButton() {
   }, [toggleDarkMode])
 
   return (
-    <div
-      className={cs('breadcrumb', 'button', !hasMounted && styles.hidden)}
-      onClick={onToggleTheme}
-    >
+    <div className={cs('breadcrumb', 'button', !hasMounted && styles.hidden)} onClick={onToggleTheme}>
       {hasMounted && isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
     </div>
   )
 }
 
-// Fallback nav (works even if site.config navigationLinks is ignored)
 const HARD_NAV = [
   { title: 'Blog', href: '/blog' },
   { title: 'Tools', href: '/tools' },
@@ -49,19 +45,16 @@ export function NotionPageHeader({
 }) {
   const { components, mapPageUrl } = useNotionContext()
 
-  // If you ever want the original Notion-style header:
   if (navigationStyle === 'default') {
     return <Header block={block} />
   }
 
-  // Decide which links to render: use config if present; otherwise fall back
   const links = (navigationLinks?.length ? navigationLinks : null) as
     | { title: string; pageId?: string; url?: string }[]
     | null
 
   return (
     <>
-      {/* Fixed, always-on-top nav bar */}
       <nav
         style={{
           position: 'fixed',
@@ -76,14 +69,11 @@ export function NotionPageHeader({
           background: '#111',
           color: '#fff',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
-          zIndex: 2147483647
+          zIndex: 2_147_483_647 // fix
         }}
       >
-        <Link href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>
-          LCB
-        </Link>
+        <Link href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>LCB</Link>
 
-        {/* Prefer site.config links if available, else HARD_NAV */}
         {links
           ? links.map((link, i) =>
               link.pageId ? (
@@ -95,12 +85,7 @@ export function NotionPageHeader({
                   {link.title}
                 </components.PageLink>
               ) : link.url ? (
-                <a
-                  key={i}
-                  href={link.url}
-                  className={cs(styles.navLink, 'breadcrumb', 'button')}
-                  style={{ color: '#fff' }}
-                >
+                <a key={i} href={link.url} className={cs(styles.navLink, 'breadcrumb', 'button')} style={{ color: '#fff' }}>
                   {link.title}
                 </a>
               ) : null
@@ -112,14 +97,11 @@ export function NotionPageHeader({
             ))}
       </nav>
 
-      {/* Spacer so the fixed nav doesn't cover page content */}
       <div style={{ height: 56 }} />
 
-      {/* The original Notion header content (breadcrumbs, theme toggle, search) */}
       <header className="notion-header">
         <div className="notion-nav-header">
           <Breadcrumbs block={block} rootOnly={true} />
-
           <div className="notion-nav-header-rhs breadcrumbs">
             <ToggleThemeButton />
             {isSearchEnabled && <Search block={block} title={null} />}

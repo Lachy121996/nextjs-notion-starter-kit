@@ -1,5 +1,4 @@
-// pages/[pageId].tsx
-import type { GetStaticProps, GetStaticPaths } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 
 import { NotionPage } from '@/components/NotionPage'
 import { domain, isDev } from '@/lib/config'
@@ -9,30 +8,21 @@ import type { PageProps, Params } from '@/lib/types'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (ctx) => {
   const rawPageId = ctx.params?.pageId as string | undefined
-  if (!rawPageId) {
-    return { notFound: true, revalidate: 60 }
-  }
+  if (!rawPageId) return { notFound: true, revalidate: 60 }
 
   try {
     const props = await resolveNotionPage(domain, rawPageId)
     return { props, revalidate: 60 }
-  } catch (err) {
-    if (isDev) {
-      // don't publish an error page; let ISR retry
-      console.error('Notion page error:', { domain, rawPageId, err })
-    }
+  } catch {
+    if (isDev) console.error('Notion page error:', { domain, rawPageId })
     return { notFound: true, revalidate: 30 }
   }
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   if (isDev) return { paths: [], fallback: 'blocking' }
-
   const siteMap = await getSiteMap()
-  const paths = Object.keys(siteMap.canonicalPageMap).map((pageId) => ({
-    params: { pageId }
-  }))
-
+  const paths = Object.keys(siteMap.canonicalPageMap).map((pageId) => ({ params: { pageId } }))
   return { paths, fallback: 'blocking' }
 }
 

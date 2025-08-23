@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
           </Head>
 
           <body>
-            {/* --- HARD, ALWAYS-ON NAV --- */}
+            {/* fixed nav (server-rendered) */}
             <div
               id="hard-nav"
               style={{
@@ -29,26 +29,21 @@ export default class MyDocument extends Document {
                 background: '#111',
                 color: '#fff',
                 borderBottom: '1px solid rgba(255,255,255,0.08)',
-                zIndex: 2147483647
+                zIndex: 2_147_483_647 // fix
               }}
             >
-              <a href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>
-                LCB
-              </a>
+              <a href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>LCB</a>
               <a href="/blog" style={{ color: '#fff' }}>Blog</a>
               <a href="/tools" style={{ color: '#fff' }}>Tools</a>
               <a href="/services" style={{ color: '#fff' }}>Services</a>
               <a href="/consulting" style={{ color: '#fff' }}>Consulting</a>
               <a href="/about" style={{ color: '#fff' }}>About</a>
             </div>
-
-            {/* spacer so content isn't hidden under the fixed nav */}
             <div style={{ height: 56 }} />
 
             <script
               dangerouslySetInnerHTML={{
                 __html: `
-/** Inlined version of noflash.js from use-dark-mode */
 ;(function () {
   var storageKey = 'darkMode'
   var classNameDark = 'dark-mode'
@@ -63,9 +58,7 @@ export default class MyDocument extends Document {
   var localStorageTheme = null
   try { localStorageTheme = localStorage.getItem(storageKey) } catch (err) {}
   var localStorageExists = localStorageTheme !== null
-  if (localStorageExists) {
-    localStorageTheme = JSON.parse(localStorageTheme)
-  }
+  if (localStorageExists) { localStorageTheme = JSON.parse(localStorageTheme) }
   if (localStorageExists) {
     setClassOnDocumentBody(localStorageTheme)
   } else if (supportsColorSchemeQuery) {

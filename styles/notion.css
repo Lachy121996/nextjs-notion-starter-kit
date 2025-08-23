@@ -404,19 +404,26 @@
   align-items: center;
 }
 
-/* --- Hide Notion's overlay header so we control the title from content --- */
-.notion-title {               /* big H1 over the cover */
-  display: none !important;
+/* ------------------------------------------------------------------ */
+/* Keep the big round icon, hide the overlay title text + breadcrumb  */
+/* ------------------------------------------------------------------ */
+
+.notion-title {                         /* keep wrapper so icon shows */
+  display: flex !important;
 }
-.notion-page-title {          /* sometimes used by react-notion-x */
-  display: none !important;
-}
-.notion-breadcrumb,           /* little pill next to the moon/search */
-.notion-nav-breadcrumb {
+
+.notion-title .notion-page-title,
+.notion-title .notion-title-text,
+.notion-page-title {                    /* hide overlay title text */
   display: none !important;
 }
 
-/* (Optional) Slight spacing tighten under the cover after removing the overlay */
+.notion-breadcrumb,
+.notion-nav-breadcrumb {                /* hide tiny breadcrumb pill */
+  display: none !important;
+}
+
+/* Optional: tighten spacing under cover after removing overlay title */
 .notion-page .notion-page-content {
   padding-top: 12px;
 }

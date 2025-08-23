@@ -7,11 +7,15 @@ export default class MyDocument extends Document {
       <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
         <Html lang="en">
           <Head>
-            {/* Favicons */}
+            {/* --- Favicons --- */}
+            {/* Your chosen SVG favicon (rename your file to /public/lcb-favicon.svg) */}
             <link rel="icon" href="/lcb-favicon.svg" type="image/svg+xml" />
+            {/* Optional PNG fallbacks if you have them */}
             <link rel="icon" href="/lcb-favicon-32.png" sizes="32x32" type="image/png" />
             <link rel="icon" href="/lcb-favicon-16.png" sizes="16x16" type="image/png" />
+            {/* Optional older fallback */}
             <link rel="shortcut icon" href="/favicon.ico" />
+            {/* Apple touch icon if present */}
             <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
             {/* PWA manifest (optional) */}
@@ -19,6 +23,7 @@ export default class MyDocument extends Document {
           </Head>
 
           <body>
+            {/* fixed nav (server-rendered) */}
             <div
               id="hard-nav"
               style={{
@@ -34,7 +39,8 @@ export default class MyDocument extends Document {
                 background: '#111',
                 color: '#fff',
                 borderBottom: '1px solid rgba(255,255,255,0.08)',
-                zIndex: 2147483647
+                // use scientific notation to avoid ESLint numeric-separators rule
+                zIndex: 2e9
               }}
             >
               <a href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>LCB</a>
@@ -48,7 +54,32 @@ export default class MyDocument extends Document {
 
             <script
               dangerouslySetInnerHTML={{
-                __html: `/* dark mode bootstrap (unchanged) */;(function(){var s='darkMode',d='dark-mode',l='light-mode';function a(n){document.body.classList.add(n?d:l);document.body.classList.remove(n?l:d)}var q='(prefers-color-scheme: dark)',m=window.matchMedia(q),c=m.media===q,t=null;try{t=localStorage.getItem(s)}catch(e){}var e=t!==null;if(e){t=JSON.parse(t)}if(e){a(t)}else if(c){a(m.matches);localStorage.setItem(s,m.matches)}else{var k=document.body.classList.contains(d);localStorage.setItem(s,JSON.stringify(k))}})();`
+                __html: `
+;(function () {
+  var storageKey = 'darkMode'
+  var classNameDark = 'dark-mode'
+  var classNameLight = 'light-mode'
+  function setClassOnDocumentBody(darkMode) {
+    document.body.classList.add(darkMode ? classNameDark : classNameLight)
+    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
+  }
+  var preferDarkQuery = '(prefers-color-scheme: dark)'
+  var mql = window.matchMedia(preferDarkQuery)
+  var supportsColorSchemeQuery = mql.media === preferDarkQuery
+  var localStorageTheme = null
+  try { localStorageTheme = localStorage.getItem(storageKey) } catch (err) {}
+  var localStorageExists = localStorageTheme !== null
+  if (localStorageExists) { localStorageTheme = JSON.parse(localStorageTheme) }
+  if (localStorageExists) {
+    setClassOnDocumentBody(localStorageTheme)
+  } else if (supportsColorSchemeQuery) {
+    setClassOnDocumentBody(mql.matches)
+    localStorage.setItem(storageKey, mql.matches)
+  } else {
+    var isDarkMode = document.body.classList.contains(classNameDark)
+    localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
+  }
+})();`
               }}
             />
             <Main />

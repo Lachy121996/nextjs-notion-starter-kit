@@ -7,9 +7,13 @@ export default class MyDocument extends Document {
       <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
         <Html lang="en">
           <Head>
-            <link rel="shortcut icon" href="/favicon.ico" />
-            <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+            {/* Favicon + Icons */}
+            <link rel="icon" type="image/png" href="/lcb-favicon.png" />
+            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
             <link rel="manifest" href="/manifest.json" />
+
+            {/* Optional: fallback .ico if older browsers need it */}
+            <link rel="shortcut icon" href="/favicon.ico" />
           </Head>
 
           <body>
@@ -29,7 +33,7 @@ export default class MyDocument extends Document {
                 background: '#111',
                 color: '#fff',
                 borderBottom: '1px solid rgba(255,255,255,0.08)',
-                zIndex: 2_147_483_647 // fix
+                zIndex: 2147483647 // fix
               }}
             >
               <a href="/" style={{ color: '#fff', fontWeight: 700, marginRight: 12 }}>LCB</a>

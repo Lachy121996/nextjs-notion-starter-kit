@@ -1,10 +1,9 @@
-/* eslint-disable simple-import-sort/imports */
 import type * as types from 'notion-types'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
 import * as React from 'react'
-import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
+import { Breadcrumbs, Header, Search } from 'react-notion-x'
 
 import { isSearchEnabled, navigationStyle } from '@/lib/config'
 import { useDarkMode } from '@/lib/use-dark-mode'
@@ -38,13 +37,11 @@ export function NotionPageHeader({
 }: {
   block: types.CollectionViewPageBlock | types.PageBlock
 }) {
-  const { } = useNotionContext()
-
   if (navigationStyle === 'default') {
     return <Header block={block} />
   }
 
-  // Just show the standard Notion header bits (no custom nav, no spacer)
+  // Only the standard Notion header (breadcrumbs + theme toggle + search)
   return (
     <header className="notion-header">
       <div className="notion-nav-header">

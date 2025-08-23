@@ -403,3 +403,20 @@
 .notion-equation.notion-equation-block{
   align-items: center;
 }
+
+/* --- Hide Notion's overlay header so we control the title from content --- */
+.notion-title {               /* big H1 over the cover */
+  display: none !important;
+}
+.notion-page-title {          /* sometimes used by react-notion-x */
+  display: none !important;
+}
+.notion-breadcrumb,           /* little pill next to the moon/search */
+.notion-nav-breadcrumb {
+  display: none !important;
+}
+
+/* (Optional) Slight spacing tighten under the cover after removing the overlay */
+.notion-page .notion-page-content {
+  padding-top: 12px;
+}

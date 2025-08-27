@@ -60,3 +60,6 @@ body {
 ::-webkit-scrollbar-track {           
     background-color: var(--bg-color);
 }
+body {
+  background-color: #19181b !important;
+}

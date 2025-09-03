@@ -5,7 +5,7 @@ export default siteConfig({
   rootNotionPageId: '2561f7289de980a9953de5ee7fb1c1fe',
   rootNotionSpaceId: null,
 
-  name: 'Lachlan’s Blog',
+  name: 'Sharing Wisdom From Within',
   domain: 'lachlancb.me', // was "localhost"
   author: 'Lachlan Coleman Barrett',
   description: 'SEO-driven hub built with Next.js + Notion',

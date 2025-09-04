@@ -60,6 +60,21 @@ body {
 ::-webkit-scrollbar-track {           
     background-color: var(--bg-color);
 }
-body {
-  background-color: #19181b !important;
+/* Quick global background override */
+html, body, #__next { background: #19181b !important; }
+
+/* Optional: make default text readable */
+body { color: #ffffff; }
+
+/* Force Notion yellow highlight to show up, even in dark mode */
+.notion .notion-yellow_background {
+  background-color: #facc15 !important; /* Tailwind's yellow-400 */
+  color: #000 !important;               /* black text for contrast */
+  padding: 0 .15em;
+  border-radius: .2rem;
+}
+.notion-h1 a,
+.notion-h2 a,
+.notion-h3 a {
+  display: none !important;
 }
